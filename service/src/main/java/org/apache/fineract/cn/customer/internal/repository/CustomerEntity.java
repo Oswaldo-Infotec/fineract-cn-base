@@ -53,6 +53,14 @@ public class CustomerEntity {
   private String middleName;
   @Column(name = "surname")
   private String surname;
+  @Column(name = "curp", length = 18)
+  private String curp;
+  @Column(name = "rfc", nullable = false, length = 13)
+  private String rfc;
+  @Column(name = "id_familia", length = 10)
+  private String idFamilia;
+  @Column(name = "id_integrante", length = 10)
+  private String idIntegrante;
   @Column(name = "date_of_birth")
   private Date dateOfBirth;
   @Column(name = "is_member", nullable = false)
@@ -136,6 +144,38 @@ public class CustomerEntity {
     this.surname = surname;
   }
 
+  public String getCurp() {
+    return curp;
+  }
+
+  public void setCurp(final String curp) {
+    this.curp = curp;
+  }
+
+  public String getRfc() {
+    return rfc;
+  }
+
+  public void setRfc(final String rfc) {
+    this.rfc = rfc;
+  }
+
+  public String getIdFamilia() {
+    return idFamilia;
+  }
+
+  public void setIdFamilia(final String idFamilia) {
+    this.idFamilia = idFamilia;
+  }
+
+  public String getIdIntegrante() {
+    return idIntegrante;
+  }
+
+  public void setIdIntegrante(final String idIntegrante) {
+    this.idIntegrante = idIntegrante;
+  }
+  
   public Date getDateOfBirth() {
     return this.dateOfBirth;
   }
@@ -255,4 +295,5 @@ public class CustomerEntity {
   public int hashCode() {
     return identifier.hashCode();
   }
+
 }

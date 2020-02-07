@@ -143,6 +143,10 @@ public class CustomerRestController {
       this.fieldValueValidator.validateValues(customer.getCustomValues());
     }
 
+    if(!customer.getType().equals("moral")){
+      this.fieldValueValidator.validateCURP(customer.getCurp());
+    }
+    this.fieldValueValidator.validateRFC(customer.getRfc());
     this.commandGateway.process(new CreateCustomerCommand(customer));
     return ResponseEntity.accepted().build();
   }
@@ -201,6 +205,12 @@ public class CustomerRestController {
         this.fieldValueValidator.validateValues(customer.getCustomValues());
       }
       this.commandGateway.process(new UpdateCustomerCommand(customer));
+
+      if(!customer.getType().equals("moral")){
+        this.fieldValueValidator.validateCURP(customer.getCurp());
+      }
+      this.fieldValueValidator.validateRFC(customer.getRfc());
+      
     } else {
       throw ServiceException.notFound("Customer {0} not found.", identifier);
     }
