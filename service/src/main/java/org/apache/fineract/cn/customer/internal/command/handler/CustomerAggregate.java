@@ -135,6 +135,10 @@ public class CustomerAggregate {
     final CustomerEntity customerEntity = CustomerMapper.map(customer);
     customerEntity.setCurrentState(Customer.State.PENDING.name());
     customerEntity.setAddress(savedAddress);
+
+    if (customer.getType().equals(Customer.Type.BUSINESS))
+      customerEntity.setCurp(null);
+
     final CustomerEntity savedCustomerEntity = this.customerRepository.save(customerEntity);
 
     if (customer.getContactDetails() != null) {

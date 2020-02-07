@@ -53,6 +53,14 @@ public class CustomerEntity {
   private String middleName;
   @Column(name = "surname")
   private String surname;
+  @Column(name = "rfc", nullable = false)
+  private String rfc;
+  @Column(name = "curp")
+  private String curp;
+  @Column(name = "family_id")
+  private String family;
+  @Column(name = "family_member_id")
+  private String familyMember;
   @Column(name = "date_of_birth")
   private Date dateOfBirth;
   @Column(name = "is_member", nullable = false)
@@ -135,6 +143,22 @@ public class CustomerEntity {
   public void setSurname(final String surname) {
     this.surname = surname;
   }
+
+  public String getRfc() { return rfc; }
+
+  public void setRfc(String rfc) { this.rfc = rfc; }
+
+  public String getCurp() { return curp; }
+
+  public void setCurp(String curp) { this.curp = curp; }
+
+  public String getFamily() { return family; }
+
+  public void setFamily(String family) { this.family = family; }
+
+  public String getFamilyMember() { return familyMember; }
+
+  public void setFamilyMember(String familyMember) { this.familyMember = familyMember; }
 
   public Date getDateOfBirth() {
     return this.dateOfBirth;

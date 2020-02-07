@@ -139,12 +139,19 @@ public class CustomerRestController {
       throw ServiceException.conflict("Customer {0} already exists.", customer.getIdentifier());
     }
 
+    if (this.customerService.checkRFC(customer.getRfc()))
+      throw ServiceException.badRequest("Customer's RFC {0} is not valid");
+
+    if (this.customerService.checkCURPForPerson(customer.getType(), customer.getCurp()))
+      throw ServiceException.badRequest("Customer's CURP {0} is not valid");
+
     if (customer.getCustomValues() != null) {
       this.fieldValueValidator.validateValues(customer.getCustomValues());
     }
 
     this.commandGateway.process(new CreateCustomerCommand(customer));
     return ResponseEntity.accepted().build();
+
   }
 
   @Permittable(value = AcceptedTokenType.TENANT, groupId = PermittableGroupIds.CUSTOMER)
@@ -204,6 +211,13 @@ public class CustomerRestController {
     } else {
       throw ServiceException.notFound("Customer {0} not found.", identifier);
     }
+
+    if (this.customerService.checkRFC(customer.getRfc()))
+      throw ServiceException.badRequest("Customer's RFC {0} is not valid");
+
+    if (this.customerService.checkCURPForPerson(customer.getType(), customer.getCurp()))
+      throw ServiceException.badRequest("Customer's CURP {0} is not valid");
+
     return ResponseEntity.accepted().build();
   }
 

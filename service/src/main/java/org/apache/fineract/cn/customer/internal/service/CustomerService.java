@@ -40,6 +40,9 @@ import java.util.stream.Stream;
 @Service
 public class CustomerService {
 
+  private static final String RFC_REGEXP = "^[A-Za-z]{3,4}+[0-9]{6}+[A-Za-z0-9]{3}";
+  private static final String CURP_REGEXP = "^\\D{4}+\\d{6}+[Hh|Mm]{1}+\\D{5}+[A-Za-z0-9]{1}+\\d{1}";
+
   private final CustomerRepository customerRepository;
   private final IdentificationCardRepository identificationCardRepository;
   private final IdentificationCardScanRepository identificationCardScanRepository;
@@ -226,6 +229,17 @@ public class CustomerService {
           return processSteps;
         })
         .orElse(Collections.emptyList());
+  }
+
+  public Boolean checkRFC(final String rfc){
+    return rfc.matches(RFC_REGEXP) ? Boolean.TRUE : Boolean.FALSE;
+  }
+
+  public Boolean checkCURPForPerson(final String type, final String curp){
+    if (type.equals(Customer.Type.PERSON.name())){
+      return curp.matches(CURP_REGEXP) ? Boolean.TRUE : Boolean.FALSE;
+    }
+    return Boolean.FALSE;
   }
 
   private ProcessStep buildProcessStep(final CustomerEntity customerEntity, final Command.Action action) {
