@@ -49,6 +49,11 @@ public final class Customer {
   @NotBlank
   private String surname;
   @NotNull
+  private String rfc;
+  private String curp;
+  private String idFamily;
+  private String idMember;
+  @NotNull
   private DateOfBirth dateOfBirth;
   @NotNull
   private Boolean member;
@@ -232,4 +237,39 @@ public final class Customer {
   public void setLastModifiedOn(final String lastModifiedOn) {
     this.lastModifiedOn = lastModifiedOn;
   }
+
+  public String getRfc() {
+    return rfc;
+  }
+
+  public void setRfc(String rfc) {
+    this.rfc = rfc;
+  }
+
+  public String getCurp() {
+    return curp;
+  }
+
+  public void setCurp(String curp) {
+    this.curp = curp;
+  }
+
+  public String getIdFamily() {
+    return idFamily;
+  }
+
+  public void setIdFamily(String idFamily) {
+    this.idFamily = idFamily;
+  }
+
+  public String getIdMember() {
+    return idMember;
+  }
+
+  public void setIdMember(String idMember) {
+    this.idMember = idMember;
+  }
+
+
+  
 }

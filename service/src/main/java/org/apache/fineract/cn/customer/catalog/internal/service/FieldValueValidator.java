@@ -158,4 +158,33 @@ public class FieldValueValidator {
       throw ServiceException.badRequest("Unsupported option {0} for field {1}.", value.getValue(), fieldEntity.getLabel());
     }
   }
+
+  public void validateRFC(final String rfc){
+    String PATERN = "[A-Z]{0,4}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z0-9]{3}";
+    if(rfc == null || rfc.equals("")){
+      throw ServiceException.conflict("The federal taxpayer registration (RFC) is a required field.", rfc);
+    }else{
+      if(!rfc.matches(PATERN)){
+        throw ServiceException.conflict("The federal taxpayer registration (RFC) {0} is not valid.", rfc);
+      }
+    }
+  }
+
+  public void validateCURP(final String curp){
+    String PATERN = "[A-Z]{1}[AEIOUX]{1}[A-Z]{2}[0-9]{2}"
+    + "(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+    + "[HM]{1}"
+    + "(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)"
+    + "[B-DF-HJ-NP-TV-Z]{3}" + "[0-9A-Z]{1}[0-9]{1}";
+
+    if(curp == null || curp.equals("")){
+      throw ServiceException.conflict("The unique population registration key (CURP) is a required field.", curp);
+    }else{
+      if(!curp.matches(PATERN)){
+        throw ServiceException.conflict("The unique population registration key (CURP) {0} is not valid.", curp);
+      }
+    }
+
+  }
+
 }

@@ -141,6 +141,11 @@ public class CustomerRestController {
 
     if (customer.getCustomValues() != null) {
       this.fieldValueValidator.validateValues(customer.getCustomValues());
+    }    
+
+    this.fieldValueValidator.validateRFC(customer.getRfc());
+    if(!customer.getType().equals("moral")){
+      this.fieldValueValidator.validateCURP(customer.getCurp());
     }
 
     this.commandGateway.process(new CreateCustomerCommand(customer));

@@ -58,6 +58,11 @@ public final class CustomerMapper {
     }
     customerEntity.setCreatedBy(UserContextHolder.checkedGetUser());
     customerEntity.setCreatedOn(LocalDateTime.now(Clock.systemUTC()));
+    customerEntity.setRfc(customer.getRfc());
+    customerEntity.setCurp(customer.getCurp());
+    customerEntity.setIdFamily(customer.getIdFamily());
+    customerEntity.setIdMember(customer.getIdMember());
+
     return customerEntity;
   }
 
@@ -87,7 +92,10 @@ public final class CustomerMapper {
       customer.setLastModifiedBy(customerEntity.getLastModifiedBy());
       customer.setLastModifiedOn(DateConverter.toIsoString(customerEntity.getLastModifiedOn()));
     }
-
+    customerEntity.setRfc(customer.getRfc());
+    customerEntity.setCurp(customer.getCurp());
+    customerEntity.setIdFamily(customer.getIdFamily());
+    customerEntity.setIdMember(customer.getIdMember());
     return customer;
   }
 }
